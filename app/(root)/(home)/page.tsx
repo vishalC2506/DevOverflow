@@ -6,8 +6,41 @@ import { Button } from "@/components/ui/button";
 
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 
+import { HomePageFilters } from "@/constants/filters";
+import Filter from "@/components/shared/Filter";
+import HomeFilters from "@/components/home/HomeFilters";
+import NoResultFound from "@/components/shared/NoResultFound";
+
 export default function Home() {
   const { userId } = auth();
+  const questions = [
+    /*  {
+      _id: 1,
+      title: "is simply dummy text of the printing",
+      tags: [
+        { _id: 1, name: "pyhton" },
+        { _id: 2, name: "java" },
+      ],
+      author: "vishal",
+      upvotes: 10,
+      views: 100,
+      answer: 2,
+      createdAt: "12:05:2023",
+    },
+    {
+      _id: 2,
+      title: "is simply dummy text of the printing",
+      tags: [
+        { _id: 1, name: "pyhton" },
+        { _id: 2, name: "java" },
+      ],
+      author: "vishal",
+      upvotes: 10,
+      views: 100,
+      answer: 2,
+      createdAt: "12:05:2023",
+    },*/
+  ];
   return (
     <>
       <div
@@ -32,7 +65,26 @@ export default function Home() {
           placeholder="search for questions"
           otherClasses="flex-1"
         />
-        Filter
+        <Filter
+          filters={HomePageFilters}
+          otherClasses="min-h-[56px] sm:min-w-[170px]"
+          containerClasses="max-md:flex hidden"
+        />
+      </div>
+      <HomeFilters />
+      <div className="mt-10 flex w-full flex-col gap-6">
+        {questions.length > 0 ? (
+          questions.map((question) => "QuestionCard")
+        ) : (
+          <NoResultFound
+            title=" There&nbsp;s no question to show"
+            description="  Be the first to break the silence! 🚀 Ask a question and kickstart the
+        discussion. Our query could be the next big thing others learn from. Get
+        involved!"
+            link="ask-question"
+            linkTitle="ask-question"
+          />
+        )}
       </div>
     </>
   );
